@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Date Display ---
     function setDate() {
         const dateElement = document.getElementById('current-date');
-        const now = new Date();
+        const now = new Date(); // Uses the user's current date
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateElement.textContent = now.toLocaleDateString('en-US', options);
     }
@@ -245,6 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const weekProgressText = document.getElementById('week-progress-text');
 
     function updateProgress() {
+        // This calculates progress based on the *currently visible* checkboxes. 
+        // In a real multi-week app, you'd count all checkboxes across all weeks.
         const checkedCount = document.querySelectorAll('.task-checkbox:checked').length;
         const overallPercent = totalTasks > 0 ? Math.round((checkedCount / totalTasks) * 100) : 0;
         const offset = circumference - (overallPercent / 100) * circumference;
@@ -287,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateTodaysTasks() {
         const todayTaskList = document.getElementById('today-task-list');
         todayTaskList.innerHTML = ''; 
-        // In a real app, this would be based on the current date. For this demo, we'll show Day 1 tasks.
+        // In a real app, this would be based on the current date. For this demo, we'll show Day 1-2 tasks.
         const tasksForToday = [
              { id: 'w1d1', text: '<strong>Dive into the Animal Kingdom:</strong> Master classification & key features.' },
              { id: 'w1d2', text: '<strong>Explore the Cellular Universe:</strong> Understand organelles and their functions.'}
